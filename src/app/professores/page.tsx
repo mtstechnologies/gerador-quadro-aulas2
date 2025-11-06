@@ -3,6 +3,7 @@ import { PlusCircle } from "lucide-react";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import { mockProfessors } from "@/lib/mock-data";
+import Link from "next/link";
 
 export default function ProfessoresPage() {
   return (
@@ -16,9 +17,11 @@ export default function ProfessoresPage() {
             Adicione, edite e visualize os professores da instituição.
           </p>
         </div>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Adicionar Professor
+        <Button asChild>
+          <Link href="/professores/novo">
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Adicionar Professor
+          </Link>
         </Button>
       </div>
       <DataTable columns={columns} data={mockProfessors} />
