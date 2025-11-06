@@ -3,6 +3,7 @@ import { PlusCircle } from "lucide-react";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import { mockSubjects } from "@/lib/mock-data";
+import Link from "next/link";
 
 export default function DisciplinasPage() {
   return (
@@ -16,9 +17,11 @@ export default function DisciplinasPage() {
             Adicione, edite e visualize as disciplinas da instituição.
           </p>
         </div>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Adicionar Disciplina
+        <Button asChild>
+          <Link href="/disciplinas/novo">
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Adicionar Disciplina
+          </Link>
         </Button>
       </div>
       <DataTable columns={columns} data={mockSubjects} />
