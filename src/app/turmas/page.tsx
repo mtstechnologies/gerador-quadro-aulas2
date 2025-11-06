@@ -3,6 +3,7 @@ import { PlusCircle } from "lucide-react";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import { mockSchoolClasses } from "@/lib/mock-data";
+import Link from "next/link";
 
 export default function TurmasPage() {
   return (
@@ -16,9 +17,11 @@ export default function TurmasPage() {
             Adicione, edite e visualize as turmas da instituição.
           </p>
         </div>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Adicionar Turma
+        <Button asChild>
+          <Link href="/turmas/novo">
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Adicionar Turma
+          </Link>
         </Button>
       </div>
       <DataTable columns={columns} data={mockSchoolClasses} />
