@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
 
 export const columns: ColumnDef<SchoolClass>[] = [
   {
@@ -54,7 +55,9 @@ export const columns: ColumnDef<SchoolClass>[] = [
                 Copiar ID
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Editar Turma</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href={`/turmas/${schoolClass.id}/editar`}>Editar Turma</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem className="text-red-500">Excluir Turma</DropdownMenuItem>
             </DropdownMenuContent>
             </DropdownMenu>

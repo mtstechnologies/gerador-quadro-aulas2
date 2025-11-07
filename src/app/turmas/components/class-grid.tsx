@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { mockSchoolClasses } from '@/lib/mock-data';
 import { SchoolClass } from '@/lib/types';
 import { MoreVertical, Users } from 'lucide-react';
+import Link from 'next/link';
 
 export function ClassGrid() {
   return (
@@ -39,7 +40,9 @@ function ClassCard({ schoolClass }: { schoolClass: SchoolClass }) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-                            <DropdownMenuItem>Editar Turma</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                               <Link href={`/turmas/${schoolClass.id}/editar`}>Editar Turma</Link>
+                            </DropdownMenuItem>
                             <DropdownMenuItem className="text-red-500">Excluir Turma</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -52,7 +55,9 @@ function ClassCard({ schoolClass }: { schoolClass: SchoolClass }) {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button variant="outline" className="w-full">Ver Detalhes</Button>
+                 <Button variant="outline" className="w-full" asChild>
+                    <Link href={`/turmas/${schoolClass.id}/editar`}>Ver Detalhes</Link>
+                </Button>
             </CardFooter>
         </Card>
     )

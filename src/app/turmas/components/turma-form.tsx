@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { useToast } from '@/hooks/use-toast';
 import { Save } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import type { SchoolClass } from '@/lib/types';
 
 const formSchema = z.object({
   name: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres.'),
@@ -30,11 +30,17 @@ const formSchema = z.object({
 
 type TurmaFormValues = z.infer<typeof formSchema>;
 
-export function TurmaForm() {
+interface TurmaFormProps {
+  schoolClass?: SchoolClass;
+}
+
+export function TurmaForm({ schoolClass }: TurmaFormProps) {
   const { toast } = useToast();
+  const isEditing = !!schoolClass;
+
   const form = useForm<TurmaFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: schoolClass || {
       name: '',
       shift: 'Manhã',
       capacity: 30,
@@ -44,8 +50,8 @@ export function TurmaForm() {
   function onSubmit(data: TurmaFormValues) {
     console.log(data);
     toast({
-      title: 'Turma Cadastrada!',
-      description: `A turma ${data.name} foi adicionada com sucesso.`,
+      title: isEditing ? 'Turma Atualizada!' : 'Turma Cadastrada!',
+      description: `A turma ${data.name} foi ${isEditing ? 'atualizada' : 'adicionada'} com sucesso.`,
     });
   }
 
@@ -130,7 +136,7 @@ export function TurmaForm() {
             />
             <Button type="submit">
               <Save className="mr-2 h-4 w-4" />
-              Salvar Turma
+              {isEditing ? 'Salvar Alterações' : 'Salvar Turma'}
             </Button>
           </form>
         </Form>
