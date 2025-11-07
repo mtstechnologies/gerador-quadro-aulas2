@@ -10,11 +10,12 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { LogOut, Settings, User } from 'lucide-react';
-import { SidebarTrigger, useSidebar } from '../ui/sidebar';
+import { useSidebar } from '../ui/sidebar';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 export function Header() {
-  const { isMobile, state } = useSidebar();
+  const { state } = useSidebar();
   const avatar = PlaceHolderImages.find((img) => img.id === 'user-avatar');
 
   return (
@@ -49,9 +50,11 @@ export function Header() {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <User className="mr-2 h-4 w-4" />
-            <span>Perfil</span>
+          <DropdownMenuItem asChild>
+            <Link href="/perfil">
+              <User className="mr-2 h-4 w-4" />
+              <span>Perfil</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Settings className="mr-2 h-4 w-4" />
