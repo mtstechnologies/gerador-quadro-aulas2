@@ -3,6 +3,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
@@ -12,6 +13,7 @@ import {
 import { Book, Calendar, Clock, Cpu, LayoutDashboard, School, Users } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { Header } from './header';
 
 const navItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -55,6 +57,9 @@ export function SidebarNav() {
           ))}
         </SidebarMenu>
       </SidebarContent>
+      <SidebarFooter>
+        <Header/>
+      </SidebarFooter>
     </Sidebar>
   );
 }

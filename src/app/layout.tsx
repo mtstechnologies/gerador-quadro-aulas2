@@ -3,7 +3,6 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import { Header } from '@/components/layout/header';
 import { SidebarNav } from '@/components/layout/sidebar-nav';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -48,7 +47,6 @@ export default function RootLayout({
           <div className="flex min-h-screen">
             <SidebarNav />
             <div className="flex flex-1 flex-col">
-              <Header />
               <main className="flex-1 p-4 md:p-8">{children}</main>
             </div>
           </div>
