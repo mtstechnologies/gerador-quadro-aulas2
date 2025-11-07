@@ -19,6 +19,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Save } from 'lucide-react';
 import { mockSubjects } from '@/lib/mock-data';
 import { Checkbox } from '@/components/ui/checkbox';
+import type { Professor } from '@/lib/types';
+import { mockProfessors } from '@/lib/mock-data';
 
 const formSchema = z.object({
   name: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres.'),
@@ -28,11 +30,21 @@ const formSchema = z.object({
 
 type ProfessorFormValues = z.infer<typeof formSchema>;
 
-export function ProfessorForm() {
+interface ProfessorFormProps {
+    professor?: Professor;
+}
+
+export function ProfessorForm({ professor }: ProfessorFormProps) {
   const { toast } = useToast();
+  const isEditing = !!professor;
+
   const form = useForm<ProfessorFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: isEditing ? {
+        name: professor.name,
+        email: professor.email,
+        subjectIds: mockSubjects.filter(s => professor.subjects.includes(s.name)).map(s => s.id)
+    } : {
       name: '',
       email: '',
       subjectIds: [],
@@ -42,8 +54,8 @@ export function ProfessorForm() {
   function onSubmit(data: ProfessorFormValues) {
     console.log(data);
     toast({
-      title: 'Professor Cadastrado!',
-      description: `O professor ${data.name} foi adicionado com sucesso.`,
+      title: isEditing ? 'Professor Atualizado!' : 'Professor Cadastrado!',
+      description: `O professor ${data.name} foi ${isEditing ? 'atualizado' : 'adicionado'} com sucesso.`,
     });
   }
 
@@ -137,7 +149,7 @@ export function ProfessorForm() {
             />
             <Button type="submit">
               <Save className="mr-2 h-4 w-4" />
-              Salvar Professor
+              {isEditing ? 'Salvar Alterações' : 'Salvar Professor'}
             </Button>
           </form>
         </Form>

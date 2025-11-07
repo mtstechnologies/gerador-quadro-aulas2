@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
 
 export const columns: ColumnDef<Professor>[] = [
   {
@@ -55,7 +56,9 @@ export const columns: ColumnDef<Professor>[] = [
                 Copiar ID
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Editar Professor</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href={`/professores/${professor.id}/editar`}>Editar Professor</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem className="text-red-500">Excluir Professor</DropdownMenuItem>
             </DropdownMenuContent>
             </DropdownMenu>

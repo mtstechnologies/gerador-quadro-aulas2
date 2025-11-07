@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { mockProfessors } from '@/lib/mock-data';
 import { Professor } from '@/lib/types';
 import { Mail, MoreVertical } from 'lucide-react';
+import Link from 'next/link';
 
 export function ProfessorGrid() {
   return (
@@ -39,7 +40,9 @@ function ProfessorCard({ professor }: { professor: Professor }) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-                            <DropdownMenuItem>Editar Professor</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <Link href={`/professores/${professor.id}/editar`}>Editar Professor</Link>
+                            </DropdownMenuItem>
                             <DropdownMenuItem className="text-red-500">Excluir Professor</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -54,7 +57,9 @@ function ProfessorCard({ professor }: { professor: Professor }) {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button variant="outline" className="w-full">Ver Detalhes</Button>
+                <Button variant="outline" className="w-full" asChild>
+                    <Link href={`/professores/${professor.id}/editar`}>Ver Detalhes</Link>
+                </Button>
             </CardFooter>
         </Card>
     )
