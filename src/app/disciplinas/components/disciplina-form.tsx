@@ -18,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { useToast } from '@/hooks/use-toast';
 import { Save } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
+import type { Subject } from '@/lib/types';
 
 const formSchema = z.object({
   name: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres.'),
@@ -28,11 +29,17 @@ const formSchema = z.object({
 
 type DisciplinaFormValues = z.infer<typeof formSchema>;
 
-export function DisciplinaForm() {
+interface DisciplinaFormProps {
+  subject?: Subject;
+}
+
+export function DisciplinaForm({ subject }: DisciplinaFormProps) {
   const { toast } = useToast();
+  const isEditing = !!subject;
+
   const form = useForm<DisciplinaFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: subject || {
       name: '',
       code: '',
       workload: 4,
@@ -43,8 +50,8 @@ export function DisciplinaForm() {
   function onSubmit(data: DisciplinaFormValues) {
     console.log(data);
     toast({
-      title: 'Disciplina Cadastrada!',
-      description: `A disciplina ${data.name} foi adicionada com sucesso.`,
+      title: isEditing ? 'Disciplina Atualizada!' : 'Disciplina Cadastrada!',
+      description: `A disciplina ${data.name} foi ${isEditing ? 'atualizada' : 'adicionada'} com sucesso.`,
     });
   }
 
@@ -124,7 +131,7 @@ export function DisciplinaForm() {
             />
             <Button type="submit">
               <Save className="mr-2 h-4 w-4" />
-              Salvar Disciplina
+              {isEditing ? 'Salvar Alterações' : 'Salvar Disciplina'}
             </Button>
           </form>
         </Form>

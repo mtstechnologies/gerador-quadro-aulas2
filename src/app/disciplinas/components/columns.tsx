@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import Link from "next/link"
 
 export const columns: ColumnDef<Subject>[] = [
   {
@@ -68,7 +69,9 @@ export const columns: ColumnDef<Subject>[] = [
                 Copiar ID
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Editar Disciplina</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href={`/disciplinas/${subject.id}/editar`}>Editar Disciplina</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem className="text-red-500">Excluir Disciplina</DropdownMenuItem>
             </DropdownMenuContent>
             </DropdownMenu>

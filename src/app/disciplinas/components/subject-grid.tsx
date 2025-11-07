@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { mockSubjects } from '@/lib/mock-data';
 import { Subject } from '@/lib/types';
 import { Clock, FlaskConical, MoreVertical, CheckCircle, XCircle } from 'lucide-react';
+import Link from 'next/link';
 
 export function SubjectGrid() {
   return (
@@ -37,7 +38,9 @@ function SubjectCard({ subject }: { subject: Subject }) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-                            <DropdownMenuItem>Editar Disciplina</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <Link href={`/disciplinas/${subject.id}/editar`}>Editar Disciplina</Link>
+                            </DropdownMenuItem>
                             <DropdownMenuItem className="text-red-500">Excluir Disciplina</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -57,7 +60,9 @@ function SubjectCard({ subject }: { subject: Subject }) {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button variant="outline" className="w-full">Ver Detalhes</Button>
+                 <Button variant="outline" className="w-full" asChild>
+                    <Link href={`/disciplinas/${subject.id}/editar`}>Ver Detalhes</Link>
+                </Button>
             </CardFooter>
         </Card>
     )
