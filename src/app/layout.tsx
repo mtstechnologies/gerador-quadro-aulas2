@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { SidebarNav } from '@/components/layout/sidebar-nav';
 import { Toaster } from '@/components/ui/toaster';
+import { MobileHeader } from '@/components/layout/mobile-header';
 
 const fontBody = Inter({
   subsets: ['latin'],
@@ -47,6 +48,7 @@ export default function RootLayout({
           <div className="flex min-h-screen">
             <SidebarNav />
             <div className="flex flex-1 flex-col">
+              <MobileHeader />
               <main className="flex-1 p-4 md:p-8">{children}</main>
             </div>
           </div>
